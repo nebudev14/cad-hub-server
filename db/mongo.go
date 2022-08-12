@@ -32,4 +32,6 @@ func InitConnection() {
 	mongoDB = client.Database("cads")
 }
 
+func GetClient() *mongo.Client { return mongoClient }
+func GetDB() *mongo.Database { return mongoDB }
 
