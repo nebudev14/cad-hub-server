@@ -1,17 +1,17 @@
 package db
 
 import (
-
+	"context"
 	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
-	// "go.mongodb.org/mongo-driver/mongo"
-	// "go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// var mongoDB *mongo.Database
-// var mongoClient *mongo.Client
+var mongoDB *mongo.Database
+var mongoClient *mongo.Client
 
 func InitConnection() {
 	err := godotenv.Load("local.env")
@@ -20,5 +20,16 @@ func InitConnection() {
 	}
 
 	conectionString := os.Getenv("CONNECTION_STRING")
-	fmt.Println(conectionString)
+	clientOptions := options.Client().ApplyURI(conectionString)
+
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil { panic(err) }
+
+	err = client.Ping(context.TODO(), nil)
+	if err != nil { panic(err) }
+
+	mongoClient = client
+	mongoDB = client.Database("cads")
 }
+
+
