@@ -17,6 +17,7 @@ func main() {
 	db.InitConnection()
 	routes.StartChanges(router.Group("/changes"))
 	routes.StartUpdates(router.Group("/updates"))
+	routes.StartRegister(router.Group("/register"))
 
 	router.Run()
 }

@@ -10,7 +10,7 @@ type DirectoryRequestBody struct {
 }
 
 func StartRegister(group *gin.RouterGroup) {
-
+	group.POST("/directory", RegisterDirectory);
 }
 
 func RegisterDirectory(c *gin.Context) {
