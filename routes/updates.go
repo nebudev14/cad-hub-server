@@ -30,7 +30,9 @@ func UpdateBase(c *gin.Context) {
 
 		if string(message) == "hello" {
 			message = []byte("Whats up")
+			fmt.Println("whats up")
 		}
+		fmt.Println("Received " + string(message))
 
 		err = ws.WriteMessage(mt, message)
 		if err != nil {
