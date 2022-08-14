@@ -14,7 +14,7 @@ func StartRegister(group *gin.RouterGroup) {
 }
 
 func RegisterDirectory(c *gin.Context) {
-	var reqBody DirectoryRequestBody;
+	var reqBody DirectoryRequestBody
 	if err := c.Copy().ShouldBindJSON(&reqBody); err != nil {
 		fmt.Println(err);
 	}
