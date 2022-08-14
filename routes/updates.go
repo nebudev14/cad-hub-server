@@ -15,13 +15,15 @@ func StartUpdates(group *gin.RouterGroup) {
 }
 
 func UpdateBase(c *gin.Context) {
+	data := make([]byte, 0)
+
 	ws, err := upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
 		fmt.Println(err);
 		return
 	}
 
-	defer ws.Close()
+
 
 	// Grab size of file
 	_, buffSize, err := ws.ReadMessage()
@@ -35,15 +37,7 @@ func UpdateBase(c *gin.Context) {
 	fmt.Println("size: ")
 	fmt.Println(size)
 
-	_, tag, err := ws.ReadMessage()
 
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println(tag)
-
-	data := make([]byte, 0)
 
 	for {
 		_, message, err := ws.ReadMessage()
@@ -51,21 +45,24 @@ func UpdateBase(c *gin.Context) {
 			fmt.Println(err)
 			break;
 		}
-		
+
 		for i := 0; i < len(message); i++ {
 			data = append(data, message[i])
 		}
 
-		// End
-		if len(data) == size { 
-			result := helpers.Decrypt(data, tag)
-			fmt.Println(result)
-		}
+
 
 		if err != nil {
 			fmt.Println(err)
 			break
 		}
 	}
+
+
+	// End
+	ws.Close()
+
+	result := helpers.Decrypt(data)
+	fmt.Println(result)
 
 }
