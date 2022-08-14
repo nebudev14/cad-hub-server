@@ -21,7 +21,7 @@ func StartUsers(group *gin.RouterGroup) {
 
 func CreateUser(c *gin.Context) {
 	name := c.Param("name")
-	newUser := models.User{Name: name}
+	newUser := models.User{Id: primitive.NewObjectID(), Name: name}
 
 	createNew, err := userCollection.InsertOne(context.TODO(), newUser)
 	if err != nil {
