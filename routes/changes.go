@@ -9,7 +9,7 @@ func StartChanges(group *gin.RouterGroup) {
 	group.GET("/check", CheckChange)
 }
 
-func GetAllChanges(c* gin.Context) {
+func GetAllChanges(c *gin.Context) {
 
 }
 
