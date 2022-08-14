@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/NebuDev14/cad-hub-server/models"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
