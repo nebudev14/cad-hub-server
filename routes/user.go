@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/NebuDev14/cad-hub-server/db"
 	"github.com/NebuDev14/cad-hub-server/models"
-	"github.com/NebuDev14/cad-hub-server/db/helpers"
+	"github.com/NebuDev14/cad-hub-server/helpers"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

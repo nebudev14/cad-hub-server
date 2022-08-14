@@ -28,13 +28,13 @@ func UpdateBase(c *gin.Context) {
 			break;
 		}
 
-		if string(message) == "hello" {
-			message = []byte("Whats up")
-			fmt.Println("whats up")
-		}
+		// if string(message) == "hello" {
+		// 	message = []byte("Whats up")
+		// 	fmt.Println("whats up")
+		// }
 		fmt.Println("Received " + string(message))
 
-		err = ws.WriteMessage(mt, message)
+		err = ws.WriteMessage(mt, []byte("received"))
 		if err != nil {
 			fmt.Println(err)
 			break
