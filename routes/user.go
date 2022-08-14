@@ -11,11 +11,14 @@ import (
 	"net/http"
 )
 
-var userCollection *mongo.Collection = db.GetDB().Collection("users")
+var userCollection *mongo.Collection
 
-
+func GetUserCollection() *mongo.Collection {
+	return db.GetDB().Collection("users")
+}
 
 func StartUsers(group *gin.RouterGroup) {
+	userCollection = db.GetDB().Collection("users")
 	group.GET("/:id", GetById)
 	group.POST("/:name", CreateUser)
 }
