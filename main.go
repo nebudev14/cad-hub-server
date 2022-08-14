@@ -19,6 +19,7 @@ func main() {
 	routes.StartUpdates(router.Group("/updates"))
 	routes.StartRegister(router.Group("/register"))
 	routes.StartUsers(router.Group("/users"))
+	routes.StartProjects(router.Group("/projects"))
 
 	router.Run()
 }

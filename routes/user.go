@@ -11,10 +11,11 @@ import (
 	"net/http"
 )
 
-var userCollection *mongo.Collection
+var userCollection *mongo.Collection = db.GetDB().Collection("users")
+
+
 
 func StartUsers(group *gin.RouterGroup) {
-	userCollection = db.GetDB().Collection("users")
 	group.GET("/:id", GetById)
 	group.POST("/:name", CreateUser)
 }
@@ -33,7 +34,10 @@ func CreateUser(c *gin.Context) {
 
 func GetById(c *gin.Context) {
 	id := c.Param("id")
-	result := helpers.GetUserById(id)
+	result, err := helpers.GetUserById(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest,  gin.H{"error: ": err.Error()})
+	}
 
 	c.JSON(http.StatusOK, result)
 }
